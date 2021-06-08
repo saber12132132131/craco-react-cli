@@ -6,7 +6,8 @@ import "@/assets/css/base.css"
 import App from './App';
 import "./web-vitals"
 
-ReactDOM.render( <
-  App / > ,
+
+
+ReactDOM.render( <App/> ,
   document.getElementById('root')
 );
