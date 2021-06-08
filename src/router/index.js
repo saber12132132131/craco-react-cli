@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 
 const Home = React.lazy(() => import("../pages/home"));
+const About = React.lazy(() => import("../pages/about"));
 
 
 const routes = [{
@@ -15,6 +16,10 @@ const routes = [{
   {
     path: "/home",
     component: Home,
+  },
+  {
+    path:'/about',
+    component: About,
   }
 ];
 
