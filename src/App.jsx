@@ -5,9 +5,18 @@ import { Provider } from "mobx-react";
 import store from "./store/index";
 import routes from "./router";
 
-import DevTools from "mobx-react-devtools"; // mobx调试工具
+import DevTools,{configureDevtool} from "mobx-react-devtools"; // mobx调试工具
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+configureDevtool({
+  // Turn on logging changes button programmatically:
+  logEnabled: true,
+  // Turn off displaying components updates button programmatically:
+  updatesEnabled: false,
+  // Log only changes of type `reaction`
+  // (only affects top-level messages in console, not inside groups)
+  logFilter: change => change.type === 'reaction',
+});
 
 export default memo(function App() {
   return (
@@ -17,7 +26,7 @@ export default memo(function App() {
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             {renderRoutes(routes)}
-            <DevTools />
+            <DevTools noPanel  />
           </Switch>
         </Suspense>
         <Footer />
