@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import "@/assets/css/base.css"
 
-import App from './App';
+import App from './App.jsx';
 import "./web-vitals"
 
 
