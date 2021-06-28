@@ -1,36 +1,48 @@
-import React, { memo, Suspense } from "react";
-import { HashRouter, Switch } from "react-router-dom";
-import { renderRoutes } from "react-router-config";
-import { Provider } from "mobx-react";
-import store from "./store/index";
-import routes from "./router";
+import './App.css';
+import React, { Suspense } from "react";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Link
+} from "react-router-dom";
+import { renderRoutes } from 'react-router-config';
+import router from "./router/config";
 
-import DevTools,{configureDevtool} from "mobx-react-devtools"; // mobx调试工具
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-configureDevtool({
-  // Turn on logging changes button programmatically:
-  logEnabled: true,
-  // Turn off displaying components updates button programmatically:
-  updatesEnabled: false,
-  // Log only changes of type `reaction`
-  // (only affects top-level messages in console, not inside groups)
-  logFilter: change => change.type === 'reaction',
-});
+import Store from './store/index';
+// import Store from './mobx/index'
+// import Store from "./saga/index"
+import { Provider } from 'react-redux';
+// import { Provider } from 'mobx-react';
+console.log(Store);
+function App() {
+    return (
+        <div className="App">
+            <Provider store={Store}>
+            {/* <Provider {...Store}> */}
+                <Router>
+                    <div>
+                        <nav>
+                            <ul>
+                                <li>
+                                    <Link to="/">Home</Link>
+                                </li>
+                                <li>
+                                    <Link to="/about">About</Link>
+                                </li>
+                                <li>
+                                    <Link to="/users">Users</Link>
+                                </li>
+                            </ul>
+                        </nav>
+                        <Suspense fallback={<div style={{ color: 'red', fontSize: '90px' }}>Loading...</div>}>
+                            <Switch>{renderRoutes(router)}</Switch>
+                        </Suspense>
 
-export default memo(function App() {
-  return (
-    <Provider {...store}>
-      <HashRouter>
-        <Header />
-        <Suspense fallback={<div>Loading...</div>}>
-          <Switch>
-            {renderRoutes(routes)}
-            <DevTools noPanel  />
-          </Switch>
-        </Suspense>
-        <Footer />
-      </HashRouter>
-    </Provider>
-  );
-});
+                    </div>
+                </Router>
+            </Provider>
+        </div>
+    );
+}
+
+export default App;
