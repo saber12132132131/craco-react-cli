@@ -11,7 +11,7 @@ const About = React.lazy(() => import("../pages/about"));
 const routes = [{
     path: "/",
     exact: true,
-    render: () => < Redirect to = "/home" / > ,
+    render: () => < Redirect to = "/home" /> ,
   },
   {
     path: "/home",

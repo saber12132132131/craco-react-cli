@@ -4,8 +4,16 @@
  * @autor: Full
  * @date: Do not edit
  */
-import {getLCP, getFID, getCLS} from 'web-vitals';
+const reportWebVitals = onPerfEntry => {
+    if (onPerfEntry && onPerfEntry instanceof Function) {
+        import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+            getCLS(onPerfEntry);
+            getFID(onPerfEntry);
+            getFCP(onPerfEntry);
+            getLCP(onPerfEntry);
+            getTTFB(onPerfEntry);
+        });
+    }
+};
 
-getCLS(console.log);
-getFID(console.log);
-getLCP(console.log);
+export default reportWebVitals;
